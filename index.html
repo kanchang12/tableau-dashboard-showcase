@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Dashboard Showcase</title>
+    <style>
+        /* Global Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .logo span {
+            color: #3498db;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dashboard-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .dashboard-card:hover .dashboard-image img {
+            transform: scale(1.05);
+        }
+
+        .dashboard-content {
+            padding: 1.5rem;
+        }
+
+        .dashboard-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .dashboard-content p {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: #eef2f7;
+            color: #3498db;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .view-button {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Featured Dashboard Section */
+        .featured-dashboard {
+            background-color: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .featured-text h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-text p {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .featured-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: white;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: #3498db;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #3498db;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-text {
+                order: 1;
+            }
+
+            .featured-image {
+                order: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.7rem;
+            }
+
+            .featured-text h2 {
+                font-size: 1.7rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Data<span>Insight</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#dashboards">Dashboards</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#stats">Stats</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Data Visualization Excellence</h1>
+            <p>Explore our collection of interactive Tableau dashboards designed to transform complex data into actionable insights.</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Grid Section -->
+    <section class="dashboard-section" id="dashboards">
+        <div class="section-header">
+            <h2>Our Dashboard Collection</h2>
+            <p>Browse through our carefully crafted Tableau dashboards that help businesses make data-driven decisions.</p>
+        </div>
+        <div class="dashboard-grid">
+            <!-- Dashboard Card 1 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="Sales Performance Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>Sales Performance Dashboard</h3>
+                    <p>A comprehensive view of sales metrics across regions, products, and time periods.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">Sales</span>
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Performance</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Card 2 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="Customer Insights Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>Customer Insights Dashboard</h3>
+                    <p>Deep dive into customer behavior, segments, and purchasing patterns.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">Customers</span>
+                        <span class="tag">Segmentation</span>
+                        <span class="tag">Insights</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Card 3 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="Financial Analysis Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>Financial Analysis Dashboard</h3>
+                    <p>Track revenue, expenses, profit margins, and key financial metrics.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">Finance</span>
+                        <span class="tag">Metrics</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Card 4 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="Marketing Campaign Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>Marketing Campaign Dashboard</h3>
+                    <p>Evaluate marketing campaign performance, ROI, and conversion rates.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">Marketing</span>
+                        <span class="tag">Campaigns</span>
+                        <span class="tag">ROI</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Card 5 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="Supply Chain Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>Supply Chain Dashboard</h3>
+                    <p>Monitor inventory levels, supplier performance, and logistics efficiency.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">Supply Chain</span>
+                        <span class="tag">Logistics</span>
+                        <span class="tag">Inventory</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Card 6 -->
+            <div class="dashboard-card">
+                <div class="dashboard-image">
+                    <img src="/api/placeholder/800/500" alt="HR Analytics Dashboard">
+                </div>
+                <div class="dashboard-content">
+                    <h3>HR Analytics Dashboard</h3>
+                    <p>Analyze employee performance, turnover, and workforce demographics.</p>
+                    <div class="dashboard-tags">
+                        <span class="tag">HR</span>
+                        <span class="tag">Workforce</span>
+                        <span class="tag">Performance</span>
+                    </div>
+                    <a href="#" class="view-button">View Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dashboard Section -->
+    <section class="featured-dashboard" id="featured">
+        <div class="featured-container">
+            <div class="section-header">
+                <h2>Featured Dashboard</h2>
+                <p>Explore our most comprehensive and impactful visualization solution.</p>
+            </div>
+            <div class="featured-content">
+                <div class="featured-text">
+                    <h2>Executive Analytics Suite</h2>
+                    <p>Our Executive Analytics Suite provides a comprehensive overview of business performance with key metrics across all departments. This dashboard combines financial performance, operational efficiency, customer insights, and market trends in a single, interactive interface designed for strategic decision-making.</p>
+                    <p>The dashboard allows executives to drill down from high-level KPIs to granular details, enabling both quick status checks and deep analytical investigations.</p>
+                    <a href="#" class="view-button">Explore Dashboard</a>
+                </div>
+                <div class="featured-image">
+                    <img src="/api/placeholder/1000/700" alt="Executive Analytics Suite Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+        <div class="section-header">
+            <h2>Dashboard Impact</h2>
+            <p>The measurable difference our data visualizations have made for our clients.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">28%</div>
+                <div class="stat-label">Improvement in Decision Speed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15K+</div>
+                <div class="stat-label">Data Points Visualized</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">42%</div>
+                <div class="stat-label">Increase in Data Accessibility</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Business Processes Optimized</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2>Ready to Transform Your Data Experience?</h2>
+            <p>Schedule a personalized demo to see how our Tableau dashboards can bring clarity to your data and drive better business decisions.</p>
+            <a href="#" class="cta-button">Request Demo</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Data<span>Insight</span></div>
+                <p class="footer-text">We transform complex data into clear, actionable visualizations that drive better business decisions.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">f</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Dashboards</h3>
+                <ul>
+                    <li><a href="#">Sales Analytics</a></li>
+                    <li><a href="#">Customer Insights</a></li>
+                    <li><a href="#">Financial Analysis</a></li>
+                    <li><a href="#">Marketing Performance</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Data Insights Blog</a></li>
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 DataInsight. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
